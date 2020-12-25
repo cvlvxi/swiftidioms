@@ -61,7 +61,20 @@ error: no executable product available
 - Swift really has a horrrible dev environment...
 
 
-# CocoaPods Package Manager
+## CocoaPods Package Manager
 - See here [Package manager](https://cocoapods.org/)
 
 ``` sudo gem install cocoapods```
+
+
+## Swift Executable Package
+
+- https://www.avanderlee.com/swift/command-line-tool-package-manager/
+
+```
+swift package init --type executable
+
+swift build
+
+swift run
+```
