@@ -6,7 +6,8 @@ struct Parser: ParsableCommand {
     var filepath: String
 
     mutating func run() throws {
-       readFile(filepath: filepath) 
+       var tsv = TSV(filePath: filepath)
+        
     }
 }
 

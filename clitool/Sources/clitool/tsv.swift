@@ -32,9 +32,24 @@ extension LineReader: Sequence {
    }
 }
 
-public func readFile(filepath: String) {
-    var lr: LineReader! = LineReader(path: filepath)
-    for line in lr {
-        print(line.trimmingCharacters(in:.whitespacesAndNewlines))
+
+class TSV {
+    var lineReader: LineReader;
+    var delim: Character
+    var headerIdxMap: [String: Int] = [:]
+    
+    init(filePath: String, delim: Character = "\t") {
+        self.delim = delim
+        self.lineReader = LineReader(path: filePath)!
+        // Assume first line headers
+        guard let headers = self.lineReader.nextLine else {
+            fatalError("No header exists")
+        }
+        for (idx, header) in headers.split(separator: self.delim).map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) }).enumerated() {
+            headerIdxMap[header] = idx
+        }
+        print(self.headerIdxMap)
+
     }
 }
+

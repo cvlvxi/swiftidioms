@@ -545,3 +545,90 @@ reversedNames = names.sorted(by: { s1, s2 in return s1 > s2 } )
 - Multiple cursor: Shift + ctrl + Up / down
 
 
+-----------------------------------------------------------
+
+## Classes + Protocols
+
+### Setters and Getters
+
+```swift
+protocol SomeProtocol {
+    var mustBeSettable: Int { get set }
+    var doesNotNeedToBeSettable: Int { get }
+}
+
+class Starship: FullyNamed {
+    var prefix: String?
+    var name: String
+    init(name: String, prefix: String? = nil) {
+        self.name = name
+        self.prefix = prefix
+    }
+    var fullName: String {
+        return (prefix != nil ? prefix! + " " : "") + name
+    }
+```
+Look at how fullname is set 
+
+### mutating
+
+```swift
+protocol Togglable {
+    mutating func toggle()
+}
+```
+
+Specify mutating to say it will mutate the obj
+
+### Protocols with init definition
+
+```swift
+protocol SomeProtocol {
+    init(someParameter: Int)
+}
+```
+
+### Subclass that overrides super but also implements protocol init
+
+Use `required override init` 
+
+```swift
+protocol SomeProtocol {
+    init()
+}
+
+class SomeSuperClass {
+    init() {
+        // initializer implementation goes here
+    }
+}
+
+class SomeSubClass: SomeSuperClass, SomeProtocol {
+    // "required" from SomeProtocol conformance; "override" from SomeSuperClass
+    required override init() {
+        // initializer implementation goes here
+    }
+}
+```
+
+### protocols as types
+- Just like in rust use protocols like traits to say whatever implements this protocol
+
+
+### Extend existing type to conform to protocol
+
+``` swift
+protocol TextRepresentable {
+    var textualDescription: String { get }
+}
+
+//The Dice class from above can be extended to adopt and conform to TextRepresentable:
+
+extension Dice: TextRepresentable {
+    var textualDescription: String {
+        return "A \(sides)-sided dice"
+    }
+}
+```
+
+If your type already confirms but needs to be made aware use `extension Type: Protocol {}`

@@ -33,6 +33,10 @@
 	* [Storyboard](#Storyboard)
 	* [MTLPixelFormat](#MTLPixelFormat)
 	* [Metal + MTKView setup in storyboard](#MetalMTKViewsetupinstoryboard)
+	* [Summary](#Summary)
+	* [MDLMesh](#MDLMesh)
+	* [MakeRenderPipelineState](#MakeRenderPipelineState)
+	* [Renderer and MTKViewDelegate](#RendererandMTKViewDelegate)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -190,5 +194,128 @@ class ViewController: NSViewController {
     }
 ```
 
+### <a name='Summary'></a>Summary
+1. Setup Storyboard to use a MTKView
+2. ViewController is simple:
 
+```swift
+import MetalKit
+
+
+class ViewController: NSViewController {
+
+    var renderer: Renderer?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        guard let metalView = view as? MTKView else {
+            fatalError("Metal view not setup")
+        }
+        renderer = Renderer(metalView: metalView)
+    }
+
+
+    override var representedObject: Any? {
+      didSet {
+        // Update the view, if already loaded.
+      }
+    }
+}
+```
+
+Will create a metalView and pass that to a "Renderer"
+
+3. Renderer.swift
+
+```swift
+import MetalKit
+
+
+import MetalKit
+
+class Renderer: NSObject {
+
+    static var device: MTLDevice!
+    static var commandQueue: MTLCommandQueue!
+    var mesh: MTKMesh!
+    var vertexBuffer: MTLBuffer!
+    var pipelineState: MTLRenderPipelineState!
+
+    var timer: Float = 0
+
+    init(metalView: MTKView) {
+        guard let device = MTLCreateSystemDefaultDevice() else {
+            fatalError("GPU not available")
+        }
+        metalView.device = device
+        Renderer.device = device
+        Renderer.commandQueue = device.makeCommandQueue()!
+		...(continued)
+```
+
+Setup the render with the following fields:
+
+- An MTLDevice
+- An MTLCommandQueue
+- MTKMesh
+- MTKBuffer 
+- MTLRenderPipelineState
+
+We also have created a special metal file `Shaders.metal` with the following
+
+```c++
+#include <metal_stdlib>
+using namespace metal;
+
+struct VertexIn {
+  float4 position [[ attribute(0) ]];
+};
+
+vertex float4 vertex_main(const VertexIn vertexIn [[ stage_in ]],
+                          constant float &timer [[ buffer(1) ]]) {
+  float4 position = vertexIn.position;
+  position.y += timer;
+  return position;
+}
+
+fragment float4 fragment_main() {
+  return float4(1, 0, 0, 1);
+}
+```
+
+-----------------------------------------------------------
+
+### <a name='MDLMesh'></a>MDLMesh
+- [Official Docs](https://developer.apple.com/documentation/modelio/mdlmesh)
+- Make primitives like sphere cube triangle etc
+
+-----------------------------------------------------------
+
+
+### <a name='MakeRenderPipelineState'></a>MakeRenderPipelineState
+
+```swift
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+        pipelineDescriptor.vertexFunction = vertexFunction
+        pipelineDescriptor.fragmentFunction = fragmentFunction
+        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
+        pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
+
+        // After doing setup stuff let's make render pipeline staate
+        do {
+            pipelineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+        } catch let error {
+            fatalError(error.localizedDescription)
+        }
+```
+
+-----------------------------------------------------------
+
+### <a name='RendererandMTKViewDelegate'></a>Renderer and MTKViewDelegate 
+- Needs to implement this? 
+- Two methods:
+
+1. func mtkView
+2. func draw
 

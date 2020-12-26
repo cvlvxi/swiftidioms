@@ -1,6 +1,10 @@
 import MetalKit
 
-import MetalKit
+struct Vertex {
+    var position: float3
+    var color: float4
+}
+
 
 class Renderer: NSObject {
 
@@ -9,8 +13,13 @@ class Renderer: NSObject {
     var mesh: MTKMesh!
     var vertexBuffer: MTLBuffer!
     var pipelineState: MTLRenderPipelineState!
-
     var timer: Float = 0
+
+    var vertices: [Vertex] = [
+        Vertex(position: float3(0,1,0), color: float4(1,0,0,1)),
+        Vertex(position: float3(-1,-1,0), color: float4(0,1,0,1)),
+        Vertex(position: float3(1,-1,0), color: float4(0,0,1,1))
+    ]
 
     init(metalView: MTKView) {
         guard let device = MTLCreateSystemDefaultDevice() else {
@@ -34,6 +43,8 @@ class Renderer: NSObject {
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
         pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
+
+        // After doing setup stuff let's make render pipeline staate
         do {
             pipelineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch let error {
