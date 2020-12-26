@@ -1,0 +1,2 @@
+##INFO=<ID=mcap_mcap,Number=1,Type=Float,Description="Genetale mcap value">
+##INFO=<ID=mcap_sensitivity,Number=1,Type=Float,Description="Genetale mcap sensitivity">
