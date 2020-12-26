@@ -147,4 +147,8 @@ For graphics you will use the MTLRenderCommandEncoder. The render encoder will n
 - These are swapped 
 
 -----------------------------------------------------------
-i
+
+## Getting Started
+
+- Appcode / Xcode / Simulator etc 
+- [SwiftLint](https://github.com/realm/SwiftLint) & AppCode Plugin

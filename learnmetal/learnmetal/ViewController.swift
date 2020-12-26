@@ -1,29 +1,23 @@
-//
-//  ViewController.swift
-//  learnmetal
-//
-//  Created by Christopher on 26/12/20.
-//  Copyright © 2020 learnmetal. All rights reserved.
-//
-
 import Cocoa
+import Metal
+import MetalKit
 
 
 class ViewController: NSViewController {
 
-    override func viewDidLoad() {
-    super.viewDidLoad()
+    var device:MTLDevice! = nil
 
-    // Do any additional setup after loading the view.
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        device = MTLCreateSystemDefaultDevice();
     }
 
 
     override var representedObject: Any? {
-    didSet {
-    // Update the view, if already loaded.
+      didSet {
+        // Update the view, if already loaded.
+      }
     }
-    }
-
-
-
 }
