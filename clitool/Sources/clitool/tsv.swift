@@ -33,16 +33,16 @@ extension LineReader: Sequence {
 }
 
 
-class TSV: Sequence, IteratorProtocol {
+public class TSV: Sequence, IteratorProtocol {
 
-    typealias DataMap = [String:String]
-    typealias Element = DataMap
+    public typealias DataMap = [String:String]
+    public typealias Element = DataMap
     
     var lineReader: LineReader;
     var delim: Character
     var normalisedHeaders: [String] = []
     
-    init(filePath: String, delim: Character = "\t") {
+    public init(filePath: String, delim: Character = "\t") {
         self.delim = delim
         self.lineReader = LineReader(path: filePath)!
         // Assume first line headers
@@ -54,7 +54,7 @@ class TSV: Sequence, IteratorProtocol {
         }
     }
 
-    func next() -> Element? {
+    public func next() -> Element? {
         if let data = self.lineReader.nextLine {
             var dataMap: [String: String] = [:]
             for(idx, data) in data.split(separator: self.delim).map({ $0.trimmingCharacters(in: .whitespacesAndNewlines)}).enumerated() {

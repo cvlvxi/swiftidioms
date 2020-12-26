@@ -2,31 +2,8 @@ import XCTest
 import class Foundation.Bundle
 
 final class clitoolTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-
-        // Some of the APIs that we use below are available in macOS 10.13 and above.
-        guard #available(macOS 10.13, *) else {
-            return
-        }
-
-        let fooBinary = productsDirectory.appendingPathComponent("clitool")
-
-        let process = Process()
-        process.executableURL = fooBinary
-
-        let pipe = Pipe()
-        process.standardOutput = pipe
-
-        try process.run()
-        process.waitUntilExit()
-
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output = String(data: data, encoding: .utf8)
-
-        XCTAssertEqual(output, "Hello, world!\n")
+    func testTSV() throws {
+        XCTAssertEqual(true, true)
     }
 
     /// Returns path to the built products directory.
@@ -42,6 +19,6 @@ final class clitoolTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testTSV", testTSV),
     ]
 }
