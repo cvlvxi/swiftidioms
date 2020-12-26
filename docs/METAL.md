@@ -32,6 +32,7 @@
 	* [Setting up device](#Settingupdevice)
 	* [Storyboard](#Storyboard)
 	* [MTLPixelFormat](#MTLPixelFormat)
+	* [Metal + MTKView setup in storyboard](#MetalMTKViewsetupinstoryboard)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -169,3 +170,25 @@ For graphics you will use the MTLRenderCommandEncoder. The render encoder will n
 
 ### <a name='MTLPixelFormat'></a>MTLPixelFormat
 - Enum containing different values such as : `bgra8Unorm`
+
+### <a name='MetalMTKViewsetupinstoryboard'></a>Metal + MTKView setup in storyboard
+- In the storyboard you can setup MTVKView
+
+<img src="imgs/mtkview.png"/>
+
+```swift
+class ViewController: NSViewController {
+
+    var renderer: Renderer?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        guard let metalView = view as? MTKView else {
+            fatalError("Metal view not setup")
+        }
+    }
+```
+
+
+

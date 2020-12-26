@@ -1,17 +1,16 @@
-import Cocoa
-import Metal
 import MetalKit
 
 
 class ViewController: NSViewController {
 
-    var device:MTLDevice! = nil
-
+    var renderer: Renderer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        device = MTLCreateSystemDefaultDevice();
+        guard let metalView = view as? MTKView else {
+            fatalError("Metal view not setup")
+        }
     }
 
 
