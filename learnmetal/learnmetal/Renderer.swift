@@ -1,5 +1,8 @@
 import MetalKit
 
+
+import MetalKit
+
 class Renderer: NSObject {
 
     static var device: MTLDevice!
@@ -79,4 +82,5 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
 }
+
 

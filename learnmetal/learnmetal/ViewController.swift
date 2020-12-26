@@ -11,6 +11,7 @@ class ViewController: NSViewController {
         guard let metalView = view as? MTKView else {
             fatalError("Metal view not setup")
         }
+        renderer = Renderer(metalView: metalView)
     }
 
 
