@@ -1,6 +1,5 @@
 import MetalKit
 
-
 import MetalKit
 
 class Renderer: NSObject {
@@ -21,7 +20,8 @@ class Renderer: NSObject {
         Renderer.device = device
         Renderer.commandQueue = device.makeCommandQueue()!
 
-        let mdlMesh = Primitive.cube(device: device, size: 1.0)
+//        let mdlMesh = Primitive.cube(device: device, size: 1.0)
+        let mdlMesh = Primitive.sphere(device: device, size: 1.0)
         mesh = try! MTKMesh(mesh: mdlMesh, device: device)
         vertexBuffer = mesh.vertexBuffers[0].buffer
 
@@ -41,8 +41,7 @@ class Renderer: NSObject {
         }
 
         super.init()
-        metalView.clearColor = MTLClearColor(red: 1.0, green: 1.0,
-                blue: 0.8, alpha: 1)
+        metalView.clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
         metalView.delegate = self
 
     }
@@ -82,5 +81,3 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
 }
-
-

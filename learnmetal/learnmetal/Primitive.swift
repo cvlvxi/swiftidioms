@@ -9,4 +9,11 @@ class Primitive {
                 allocator: allocator)
         return mesh
     }
+
+    class func sphere(device: MTLDevice, size: Float) -> MDLMesh {
+        let allocator = MTKMeshBufferAllocator(device: device)
+        let mesh = MDLMesh(sphereWithExtent: [size, size, size],
+                segments: [40, 40], inwardNormals: false, geometryType: .triangles, allocator: allocator)
+        return mesh
+    }
 }

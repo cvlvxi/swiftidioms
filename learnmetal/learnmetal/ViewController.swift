@@ -1,6 +1,5 @@
 import MetalKit
 
-
 class ViewController: NSViewController {
 
     var renderer: Renderer?
@@ -13,7 +12,6 @@ class ViewController: NSViewController {
         }
         renderer = Renderer(metalView: metalView)
     }
-
 
     override var representedObject: Any? {
       didSet {
