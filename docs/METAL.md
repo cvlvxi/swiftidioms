@@ -28,6 +28,10 @@
 	* [Rasterization](#Rasterization)
 	* [Fragment Shading](#FragmentShading)
 	* [Raster Output](#RasterOutput)
+* [Getting Started](#GettingStarted)
+	* [Setting up device](#Settingupdevice)
+	* [Storyboard](#Storyboard)
+	* [MTLPixelFormat](#MTLPixelFormat)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -148,7 +152,20 @@ For graphics you will use the MTLRenderCommandEncoder. The render encoder will n
 
 -----------------------------------------------------------
 
-## Getting Started
+## <a name='GettingStarted'></a>Getting Started
 
 - Appcode / Xcode / Simulator etc 
 - [SwiftLint](https://github.com/realm/SwiftLint) & AppCode Plugin
+
+### <a name='Settingupdevice'></a>Setting up device
+- In this guide [clientresourcesinc](https://www.clientresourcesinc.com/2018/04/30/rendering-graphics-with-metalkit-swift-4-part-1/)
+	- They use a seperate view MetalView.swift
+	- Also they change the storyboard's Viewcontroller to use MetalView.swift rather than ViewController.swift
+
+### <a name='Storyboard'></a>Storyboard
+- See here how you can configure different views 
+
+<img src="imgs/storyboard.png"/>
+
+### <a name='MTLPixelFormat'></a>MTLPixelFormat
+- Enum containing different values such as : `bgra8Unorm`
