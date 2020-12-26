@@ -33,10 +33,14 @@ extension LineReader: Sequence {
 }
 
 
-class TSV {
+class TSV: Sequence, IteratorProtocol {
+
+    typealias DataMap = [String:String]
+    typealias Element = DataMap
+    
     var lineReader: LineReader;
     var delim: Character
-    var headerIdxMap: [String: Int] = [:]
+    var normalisedHeaders: [String] = []
     
     init(filePath: String, delim: Character = "\t") {
         self.delim = delim
@@ -45,11 +49,23 @@ class TSV {
         guard let headers = self.lineReader.nextLine else {
             fatalError("No header exists")
         }
-        for (idx, header) in headers.split(separator: self.delim).map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) }).enumerated() {
-            headerIdxMap[header] = idx
+        for header in headers.split(separator: self.delim).map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) }) {
+            normalisedHeaders.append(header)
         }
-        print(self.headerIdxMap)
-
     }
+
+    func next() -> Element? {
+        if let data = self.lineReader.nextLine {
+            var dataMap: [String: String] = [:]
+            for(idx, data) in data.split(separator: self.delim).map({ $0.trimmingCharacters(in: .whitespacesAndNewlines)}).enumerated() {
+                let header = normalisedHeaders[idx]
+                dataMap[header] = data
+            }
+            return dataMap
+        } else {
+            return nil;
+        }
+    }
+    
 }
 
