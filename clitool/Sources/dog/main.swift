@@ -1,6 +1,4 @@
 
 import somelib
 
-
-var t = TSV(filePath: "dog")
-
+print("Hello World")

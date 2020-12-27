@@ -1,8 +1,7 @@
 import XCTest
 
-import clitoolTests
-import tsvTests
+import somelibTests
 
 var tests = [XCTestCaseEntry]()
-tests += clitoolTests.allTests()
+tests += somelibTests.allTests()
 XCTMain(tests)
