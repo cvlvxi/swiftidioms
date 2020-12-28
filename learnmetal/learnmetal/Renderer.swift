@@ -21,12 +21,6 @@ class Renderer: NSObject {
         Vertex(position: SIMD3<Float>(-1,-1,0), color: SIMD4<Float>(0,1,0,1)),
         Vertex(position: SIMD3<Float>(1,-1,0), color: SIMD4<Float>(0,0,1,1))
     ]
-//    var vertices: [SIMD3<Float>] = [
-//        SIMD3<Float>(0,1,0),
-//        SIMD3<Float>(-1,-1,0),
-//        SIMD3<Float>(1,-1,0)
-//    ]
-    
 
     init(metalView: MTKView) {
         guard let device = MTLCreateSystemDefaultDevice() else {
