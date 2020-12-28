@@ -1,8 +1,8 @@
 import MetalKit
 
 struct Vertex {
-    var position: float3
-    var color: float4
+    var position: SIMD3<Float>
+    var color: SIMD4<Float>
 }
 
 
@@ -16,9 +16,9 @@ class Renderer: NSObject {
     var timer: Float = 0
 
     var vertices: [Vertex] = [
-        Vertex(position: float3(0,1,0), color: float4(1,0,0,1)),
-        Vertex(position: float3(-1,-1,0), color: float4(0,1,0,1)),
-        Vertex(position: float3(1,-1,0), color: float4(0,0,1,1))
+        Vertex(position: SIMD3<Float>(0,1,0), color: SIMD4<Float>(1,0,0,1)),
+        Vertex(position: SIMD3<Float>(-1,-1,0), color: SIMD4<Float>(0,1,0,1)),
+        Vertex(position: SIMD3<Float>(1,-1,0), color: SIMD4<Float>(0,0,1,1))
     ]
 
     init(metalView: MTKView) {

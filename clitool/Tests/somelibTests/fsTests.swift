@@ -17,7 +17,7 @@ final class fsTests: XCTestCase {
     
     func testLineProcessor() throws {
         let path = "data/mcap_small.txt"
-        let diter = DataIterator(FileHandle(forReadingAtPath: path), bufferSize: 10)
+        let diter = DataIterator(FileHandle(forReadingAtPath: path), bufferSize: 100)
         var expectedStr: String = "#grch37_chrom\tpos\tref\talt\tmcapv1.4\tmcap_sensitivityv1.4"
         let lprocessor = LineProcessor(diter)
         XCTAssertNotNil(lprocessor)
@@ -32,9 +32,28 @@ final class fsTests: XCTestCase {
         someStr = lprocessor.next()
         XCTAssertEqual(someStr, nil)
     }
+    
+    func testLineProcessorGzipped() throws {
+//        let path = "data/mcap_small2.txt.gz"
+//        let lprocessor = LineProcessor(DataIterator(FileHandle(forReadingAtPath: path), bufferSize: 10, gzipped: true))
+//        XCTAssertNotNil(lprocessor)
+//        var expectedStr: String = "#grch37_chrom\tpos\tref\talt\tmcapv1.4\tmcap_sensitivityv1.4"
+//        var someStr: String? = lprocessor.next()
+//        XCTAssertEqual(someStr, expectedStr)
+//        expectedStr = "chr1\t69091\tA\tT\t0.007082\t0.99308"
+//        someStr = lprocessor.next()
+//        XCTAssertEqual(someStr, expectedStr)
+//        expectedStr = "chr1\t69091\tA\tG\t0.009964\t0.98538"
+//        someStr = lprocessor.next()
+//        XCTAssertEqual(someStr, expectedStr)
+//        someStr = lprocessor.next()
+//        XCTAssertEqual(someStr, nil)
+        
+    }
 
     static var allTests = [
         ("testDataIterator", testDataIterator),
         ("testLineProcessor", testLineProcessor),
+        ("testLineProcessorGzipped", testLineProcessorGzipped),
     ]
 }

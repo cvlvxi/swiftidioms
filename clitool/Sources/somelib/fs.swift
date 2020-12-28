@@ -3,10 +3,11 @@ import Foundation
 public class DataIterator : Sequence, IteratorProtocol {
     let fh: FileHandle
     var bufferSize: Int
-    public init(_ fh: FileHandle!, bufferSize: Int) {
+    let gzipped: Bool
+    public init(_ fh: FileHandle!, bufferSize: Int, gzipped: Bool = false) {
         self.fh = fh
         self.bufferSize = bufferSize
-        
+        self.gzipped = gzipped
     }
     
     public func next() -> Data? {
@@ -16,7 +17,11 @@ public class DataIterator : Sequence, IteratorProtocol {
         if data.count  == 0 {
             return nil
         }
-        return data
+        if self.gzipped {
+            return try! data.gunzipped()
+        } else {
+            return data
+        }
     }
     public typealias Element = Data // Swift Data
 }
@@ -30,21 +35,6 @@ public class LineProcessor : Sequence, IteratorProtocol {
     var remainingData: Data? = nil
     public init(_ dataIterator: DataIterator) {
         self.dataIterator = dataIterator
-    }
-    
-    func nextElement(dataElement: Data) -> String? {
-//        for (idx, byte) in dataElement.enumerated() {
-//            let d = Data(repeating: byte, count: 1)
-//            let c = String(decoding: d, as: UTF8.self)
-//            if c[c.startIndex] == delim {
-//                // Don't include the new line
-//                let currData = dataElement[0..<idx]
-//                // Set last string from past the new line to end
-//                self.remainingData = dataElement[(idx+1)...]
-//                return String(decoding: currData, as: UTF8.self)
-//            }
-//        }
-        return nil
     }
     
     public func next() -> String? {
