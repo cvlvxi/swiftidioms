@@ -16,16 +16,16 @@ class Renderer: NSObject {
     var pipelineState: MTLRenderPipelineState!
     var timer: Float = 0
 
-//    var vertices: [Vertex] = [
-//        Vertex(position: SIMD3<Float>(0,1,0), color: SIMD4<Float>(1,0,0,1)),
-//        Vertex(position: SIMD3<Float>(-1,-1,0), color: SIMD4<Float>(0,1,0,1)),
-//        Vertex(position: SIMD3<Float>(1,-1,0), color: SIMD4<Float>(0,0,1,1))
-//    ]
-    var vertices: [SIMD3<Float>] = [
-        SIMD3<Float>(0,1,0),
-        SIMD3<Float>(-1,-1,0),
-        SIMD3<Float>(1,-1,0)
+    var vertices: [Vertex] = [
+        Vertex(position: SIMD3<Float>(0,1,0), color: SIMD4<Float>(1,0,0,1)),
+        Vertex(position: SIMD3<Float>(-1,-1,0), color: SIMD4<Float>(0,1,0,1)),
+        Vertex(position: SIMD3<Float>(1,-1,0), color: SIMD4<Float>(0,0,1,1))
     ]
+//    var vertices: [SIMD3<Float>] = [
+//        SIMD3<Float>(0,1,0),
+//        SIMD3<Float>(-1,-1,0),
+//        SIMD3<Float>(1,-1,0)
+//    ]
     
 
     init(metalView: MTKView) {
@@ -40,7 +40,7 @@ class Renderer: NSObject {
 //        let mdlMesh = Primitive.sphere(device: device, size: 1.0)
 //        mesh = try! MTKMesh(mesh: mdlMesh, device: device)
 //        vertexBuffer = mesh.vertexBuffers[0].buffer
-        self.vertexBuffer2 = Renderer.device.makeBuffer(bytes: vertices, length: MemoryLayout<SIMD3<Float>>.stride * vertices.count,  options: [])
+        self.vertexBuffer2 = Renderer.device.makeBuffer(bytes: vertices, length: MemoryLayout<Vertex>.stride * vertices.count,  options: [])
        
 
         let library = device.makeDefaultLibrary()

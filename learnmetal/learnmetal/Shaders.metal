@@ -1,10 +1,10 @@
 #include <metal_stdlib>
 using namespace metal;
 
-//struct VertexIn {
-//  float3 position [[ attribute(0) ]];
-//  float4 color [[ attribute(1) ]];
-//};
+struct VertexIn {
+  float3 position;
+  float4 color;
+};
 //
 //vertex float4 vertex_main(const VertexIn vertexIn [[ stage_in ]],
 //                          constant float &timer [[ buffer(1) ]]) {
@@ -13,8 +13,8 @@ using namespace metal;
 //  return position;
 //}
 
-vertex float4 vertex_main(device float3 *vertices [[ buffer(0) ]], uint vertexID [[ vertex_id ]]) {
-    return float4(vertices[vertexID], 1);
+vertex float4 vertex_main(device VertexIn *vertices [[ buffer(0) ]], uint vertexID [[ vertex_id ]]) {
+    return float4(vertices[vertexID].position, 1);
 }
 
 fragment float4 fragment_main() {
