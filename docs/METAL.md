@@ -37,6 +37,11 @@
 	* [MDLMesh](#MDLMesh)
 	* [MakeRenderPipelineState](#MakeRenderPipelineState)
 	* [Renderer and MTKViewDelegate](#RendererandMTKViewDelegate)
+* [Command Buffers](#CommandBuffers-1)
+* [CommandEncoders](#CommandEncoders)
+* [Render Pipeline State](#RenderPipelineState)
+* [Getting the MTL Library Vertex Shader / Fragment](#GettingtheMTLLibraryVertexShaderFragment)
+* [MTLBuffer](#MTLBuffer)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -319,3 +324,50 @@ fragment float4 fragment_main() {
 1. func mtkView
 2. func draw
 
+
+-----------------------------------------------------------
+
+## <a name='CommandBuffers-1'></a>Command Buffers
+- Needs a CommandEncoder
+
+## <a name='CommandEncoders'></a>CommandEncoders
+- Render Command Encoder -- needs a renderPassDescriptor
+- Compute COmmand Encoder -- needs..? 
+
+## <a name='RenderPipelineState'></a>Render Pipeline State
+- Render Pipeline Descriptor
+    - Vertex Function, Fragment function, Color Attachment
+    - Needs consistent Color Attachment Descriptor 
+
+-----------------------------------------------------------
+
+## <a name='GettingtheMTLLibraryVertexShaderFragment'></a>Getting the MTL Library Vertex Shader / Fragment
+
+```swift
+        let library = device.makeDefaultLibrary()
+        let vertexFunction = library?.makeFunction(name: "vertex_main")
+        let fragmentFunction = library?.makeFunction(name: "fragment_main")
+```
+
+-----------------------------------------------------------
+
+## <a name='MTLBuffer'></a>MTLBuffer
+
+- Unformatted Device Accessible Space
+- MTLBuffer is given a fixed amount of bytes 
+- CPU <- Read & Write -> Write
+
+-----------------------------------------------------------
+
+## Screen Space Coordinates
+- (0,0,0) - is in the middle of the screen 
+- (0,1,0) - top of screen
+
+
+-----------------------------------------------------------
+
+## Device Space
+- 30 alllowed buffer memory 
+-----------------------------------------------------------
+
+## Triangle

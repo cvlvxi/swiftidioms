@@ -12,14 +12,21 @@ class Renderer: NSObject {
     static var commandQueue: MTLCommandQueue!
     var mesh: MTKMesh!
     var vertexBuffer: MTLBuffer!
+    var vertexBuffer2: MTLBuffer!
     var pipelineState: MTLRenderPipelineState!
     var timer: Float = 0
 
-    var vertices: [Vertex] = [
-        Vertex(position: SIMD3<Float>(0,1,0), color: SIMD4<Float>(1,0,0,1)),
-        Vertex(position: SIMD3<Float>(-1,-1,0), color: SIMD4<Float>(0,1,0,1)),
-        Vertex(position: SIMD3<Float>(1,-1,0), color: SIMD4<Float>(0,0,1,1))
+//    var vertices: [Vertex] = [
+//        Vertex(position: SIMD3<Float>(0,1,0), color: SIMD4<Float>(1,0,0,1)),
+//        Vertex(position: SIMD3<Float>(-1,-1,0), color: SIMD4<Float>(0,1,0,1)),
+//        Vertex(position: SIMD3<Float>(1,-1,0), color: SIMD4<Float>(0,0,1,1))
+//    ]
+    var vertices: [SIMD3<Float>] = [
+        SIMD3<Float>(0,1,0),
+        SIMD3<Float>(-1,-1,0),
+        SIMD3<Float>(1,-1,0)
     ]
+    
 
     init(metalView: MTKView) {
         guard let device = MTLCreateSystemDefaultDevice() else {
@@ -28,11 +35,13 @@ class Renderer: NSObject {
         metalView.device = device
         Renderer.device = device
         Renderer.commandQueue = device.makeCommandQueue()!
-
+//
 //        let mdlMesh = Primitive.cube(device: device, size: 1.0)
-        let mdlMesh = Primitive.sphere(device: device, size: 1.0)
-        mesh = try! MTKMesh(mesh: mdlMesh, device: device)
-        vertexBuffer = mesh.vertexBuffers[0].buffer
+//        let mdlMesh = Primitive.sphere(device: device, size: 1.0)
+//        mesh = try! MTKMesh(mesh: mdlMesh, device: device)
+//        vertexBuffer = mesh.vertexBuffers[0].buffer
+        self.vertexBuffer2 = Renderer.device.makeBuffer(bytes: vertices, length: MemoryLayout<SIMD3<Float>>.stride * vertices.count,  options: [])
+       
 
         let library = device.makeDefaultLibrary()
         let vertexFunction = library?.makeFunction(name: "vertex_main")
@@ -41,7 +50,19 @@ class Renderer: NSObject {
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
-        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
+//        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
+//        let vertexDescriptor = MTLVertexDescriptor()
+//        vertexDescriptor.attributes[0].format = .float3
+//        vertexDescriptor.attributes[0].bufferIndex = 0
+//        vertexDescriptor.attributes[0].offset = 0
+//        vertexDescriptor.attributes[1].format = .float4
+//        vertexDescriptor.attributes[1].bufferIndex = 0
+//        vertexDescriptor.attributes[1].offset = MemoryLayout<SIMD3<Float>>.stride
+//        vertexDescriptor.layouts[0].stride = MemoryLayout<SIMD3<Float>>.stride + MemoryLayout<SIMD4<Float>>.stride
+//        pipelineDescriptor.vertexDescriptor = vertexDescriptor
+//
+//
+        
         pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
 
         // After doing setup stuff let's make render pipeline staate
@@ -75,16 +96,18 @@ extension Renderer: MTKViewDelegate {
         renderEncoder.setVertexBytes(&currentTime, length: MemoryLayout<Float>.stride, index: 1)
 
         renderEncoder.setRenderPipelineState(pipelineState)
-        renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        for submesh in mesh.submeshes {
-            renderEncoder.drawIndexedPrimitives(type: .triangle,
-                    indexCount: submesh.indexCount,
-                    indexType: submesh.indexType,
-                    indexBuffer: submesh.indexBuffer.buffer,
-                    indexBufferOffset: submesh.indexBuffer.offset)
-        }
+        renderEncoder.setVertexBuffer(self.vertexBuffer2, offset: 0, index: 0)
+//        for submesh in mesh.submeshes {
+//            renderEncoder.drawIndexedPrimitives(type: .triangle,
+//                    indexCount: submesh.indexCount,
+//                    indexType: submesh.indexType,
+//                    indexBuffer: submesh.indexBuffer.buffer,
+//                    indexBufferOffset: submesh.indexBuffer.offset)
+//        }
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertices.count)
 
         renderEncoder.endEncoding()
+        
         guard let drawable = view.currentDrawable else {
             return
         }
