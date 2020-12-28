@@ -1,4 +1,6 @@
 ARGS=$1
+DEBUGGER=lldb
+
 
 .PHONY=run build
 
@@ -7,3 +9,6 @@ run: build
 
 build:
 	swift build
+
+debug:
+	

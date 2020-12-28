@@ -1,0 +1,4 @@
+#grch37_chrom	pos	ref	alt	mcapv1.4	mcap_sensitivityv1.4
+chr1	69091	A	T	0.007082	0.99308
+chr1	69091	A	C	0.007082	0.99308
+chr1	69091	A	G	0.009964	0.98538
