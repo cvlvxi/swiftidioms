@@ -1,9 +1,5 @@
 import MetalKit
 
-struct Vertex {
-    var position: SIMD3<Float>
-    var color: SIMD4<Float>
-}
 
 
 class Renderer: NSObject {
@@ -39,7 +35,7 @@ class Renderer: NSObject {
     
 
     func createVerticesBuffers() {
-        self.vertexBuffer = Renderer.device.makeBuffer(bytes: vertices, length: MemoryLayout<Vertex>.stride * vertices.count,  options: [])
+        self.vertexBuffer = Renderer.device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count),  options: [])
     }
     
     func createPipelineState(_ metalView: MTKView) {
@@ -61,12 +57,12 @@ class Renderer: NSObject {
         // Color
         vertexDescriptor.attributes[1].format = .float4
         vertexDescriptor.attributes[1].bufferIndex = 0
-        vertexDescriptor.attributes[1].offset = MemoryLayout<SIMD3<Float>>.size
+        vertexDescriptor.attributes[1].offset = SIMD3<Float>.size()
         vertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.stride
         
         pipelineDescriptor.vertexDescriptor = vertexDescriptor
         
-        // After doing setup stuff let's make render pipeline staate
+        // After doing setup stuff let's make render pipeline state
         do {
             pipelineState = try Renderer.device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch let error {
