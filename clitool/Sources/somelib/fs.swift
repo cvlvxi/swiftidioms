@@ -48,11 +48,7 @@ public class LineProcessor : Sequence, IteratorProtocol {
                 currData = dataIterator.next()
                 if currData == nil {
                     // At the end of the file
-                    if appendedStr == nil {
-                        return nil
-                    } else {
-                        return appendedStr
-                    }
+                    return appendedStr
                 }
             } else {
                 currData = self.remainingData

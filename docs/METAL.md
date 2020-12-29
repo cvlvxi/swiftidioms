@@ -42,6 +42,9 @@
 * [Render Pipeline State](#RenderPipelineState)
 * [Getting the MTL Library Vertex Shader / Fragment](#GettingtheMTLLibraryVertexShaderFragment)
 * [MTLBuffer](#MTLBuffer)
+* [Screen Space Coordinates](#ScreenSpaceCoordinates)
+* [Device Space](#DeviceSpace)
+* [Rasterizer](#Rasterizer)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -359,15 +362,45 @@ fragment float4 fragment_main() {
 
 -----------------------------------------------------------
 
-## Screen Space Coordinates
+## <a name='ScreenSpaceCoordinates'></a>Screen Space Coordinates
 - (0,0,0) - is in the middle of the screen 
 - (0,1,0) - top of screen
 
 
 -----------------------------------------------------------
 
-## Device Space
+## <a name='DeviceSpace'></a>Device Space
 - 30 alllowed buffer memory 
+
 -----------------------------------------------------------
 
-## Triangle
+## <a name='Rasterizer'></a>Rasterizer
+- Vertex -> Rasterizer -> Fragment
+
+
+-----------------------------------------------------------
+
+## VertexDescriptor
+- Passing in per vertex information 
+
+-----------------------------------------------------------
+
+## MEsh stuff might be useful later
+
+```swift
+//
+//        let mdlMesh = Primitive.cube(device: device, size: 1.0)
+//        let mdlMesh = Primitive.sphere(device: device, size: 1.0)
+//        mesh = try! MTKMesh(mesh: mdlMesh, device: device)
+//        vertexBuffer = mesh.vertexBuffers[0].buffer
+
+and in draw
+
+//        for submesh in mesh.submeshes {
+//            renderEncoder.drawIndexedPrimitives(type: .triangle,
+//                    indexCount: submesh.indexCount,
+//                    indexType: submesh.indexType,
+//                    indexBuffer: submesh.indexBuffer.buffer,
+//                    indexBufferOffset: submesh.indexBuffer.offset)
+//        }
+```
