@@ -10,12 +10,7 @@ class Renderer: NSObject {
     var vertexBuffer: MTLBuffer!
     var pipelineState: MTLRenderPipelineState!
     var timer: Float = 0
-
-    var vertices: [Vertex] = [
-        Vertex(position: SIMD3<Float>(0,1,0), color: SIMD4<Float>(1,0,0,1)),
-        Vertex(position: SIMD3<Float>(-1,-1,0), color: SIMD4<Float>(0,1,0,1)),
-        Vertex(position: SIMD3<Float>(1,-1,0), color: SIMD4<Float>(0,0,1,1))
-    ]
+    var vertices: [Vertex] = createTree()
 
     init(metalView: MTKView) {
         super.init()
@@ -25,8 +20,11 @@ class Renderer: NSObject {
         metalView.device = device
         Renderer.device = device
         Renderer.commandQueue = device.makeCommandQueue()!
-        
-        self.createVerticesBuffers()
+
+        let head: Node = createTreeNodes()
+        let v = createTreeVertices(head, x: 0, y: 0, h: 10)
+
+        self.createVerticesBuffers(vertices: vertices)
         self.createPipelineState(metalView)
        
         metalView.clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
@@ -34,7 +32,7 @@ class Renderer: NSObject {
     }
     
 
-    func createVerticesBuffers() {
+    func createVerticesBuffers(vertices: [Vertex]) {
         self.vertexBuffer = Renderer.device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count),  options: [])
     }
     
@@ -77,6 +75,9 @@ extension Renderer: MTKViewDelegate {
     }
 
     func draw(in view: MTKView) {
+        // Spaz
+//        vertices = createTree()
+//        self.vertexBuffer = Renderer.device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count),  options: [])
         guard let descriptor = view.currentRenderPassDescriptor,
               let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
               let renderEncoder =

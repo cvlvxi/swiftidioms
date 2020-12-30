@@ -10,9 +10,12 @@
 		6735020EA7D6B368192CC2D3 /* learnmetalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67350517D1D6947F16D18436 /* learnmetalTests.swift */; };
 		673504DA968F6937A03AF1A1 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 673505287352820FC0E5D4CD /* Shaders.metal */; };
 		673504E5A2332DEFA9EC29FD /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67350AC0658633E4E700D97E /* Renderer.swift */; };
+		6735062FBC1CE76223027A7D /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673501B447934499A6D2D0CD /* Types.swift */; };
+		673507C26B89C81B38900758 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67350B8BD64310F3EA942ACC /* Tree.swift */; };
 		6735088D317E672B82772581 /* learnmetalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67350D6A145DA92B1C3D1490 /* learnmetalUITests.swift */; };
 		673508C9946D0161F7804C64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 673502C8B988D452B1401CE4 /* Main.storyboard */; };
 		6735099E286F12F4D9F609BC /* Primitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673501122730ADF6C0028C7D /* Primitive.swift */; };
+		673509E431270537BC2E1872 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673504EC0EF78BCEF0A955AF /* Triangle.swift */; };
 		67350A091D3E2DCDE17C6470 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67350ED72447CBD6D4B04854 /* AppDelegate.swift */; };
 		67350A6414CCB9A71F36ED17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67350E22C0490DCCAECFF69D /* ViewController.swift */; };
 		67350D6367115595F22D6FE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 673505DD98A6A5B3ABFCA1C4 /* Assets.xcassets */; };
@@ -37,8 +40,10 @@
 
 /* Begin PBXFileReference section */
 		673501122730ADF6C0028C7D /* Primitive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Primitive.swift; sourceTree = "<group>"; };
+		673501B447934499A6D2D0CD /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		673503466FB5F025F0594D1E /* learnmetal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = learnmetal.entitlements; sourceTree = "<group>"; };
 		6735038CA4BC16EAFC0D4FA7 /* learnmetalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = learnmetalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		673504EC0EF78BCEF0A955AF /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		67350517D1D6947F16D18436 /* learnmetalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = learnmetalTests.swift; sourceTree = "<group>"; };
 		673505287352820FC0E5D4CD /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		6735053CFC12EF972317F308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +52,7 @@
 		673506347249431433AD2D29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		67350ABB251A683AC7F68B2C /* learnmetal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learnmetal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67350AC0658633E4E700D97E /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		67350B8BD64310F3EA942ACC /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		67350CB24D832E3A72B7D838 /* learnmetalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = learnmetalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67350D6A145DA92B1C3D1490 /* learnmetalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = learnmetalUITests.swift; sourceTree = "<group>"; };
 		67350D74F0997277A62156B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
@@ -91,6 +97,8 @@
 				67350AC0658633E4E700D97E /* Renderer.swift */,
 				673501122730ADF6C0028C7D /* Primitive.swift */,
 				673505287352820FC0E5D4CD /* Shaders.metal */,
+				673501B447934499A6D2D0CD /* Types.swift */,
+				67350C39903820B637415E53 /* Geometry */,
 			);
 			path = learnmetal;
 			sourceTree = "<group>";
@@ -131,6 +139,15 @@
 				67350A8152504D965EC72D85 /* learnmetalTests */,
 				67350735B4C3A4C2AF7A2ED6 /* learnmetalUITests */,
 			);
+			sourceTree = "<group>";
+		};
+		67350C39903820B637415E53 /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				67350B8BD64310F3EA942ACC /* Tree.swift */,
+				673504EC0EF78BCEF0A955AF /* Triangle.swift */,
+			);
+			path = Geometry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +279,9 @@
 				673504E5A2332DEFA9EC29FD /* Renderer.swift in Sources */,
 				6735099E286F12F4D9F609BC /* Primitive.swift in Sources */,
 				673504DA968F6937A03AF1A1 /* Shaders.metal in Sources */,
+				6735062FBC1CE76223027A7D /* Types.swift in Sources */,
+				673507C26B89C81B38900758 /* Tree.swift in Sources */,
+				673509E431270537BC2E1872 /* Triangle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
