@@ -57,4 +57,11 @@ class deflateTests: XCTestCase {
         XCTAssertTrue(h.priorityQueue[16].chars == newNode.chars)
     }
 
+    func testMakeTrees() throws {
+        let h = Hoffman(someString: someString)
+        h.makeTrees()
+        h.printTree(node: h.head!, currLevel: 0)
+    }
+
+
 }

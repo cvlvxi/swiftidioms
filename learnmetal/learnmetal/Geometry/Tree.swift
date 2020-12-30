@@ -3,9 +3,11 @@ let DEFAULT_WIDTH: Float = 0.01
 var DEFAULT_COLOR: SIMD4<Float> = SIMD4<Float>(1,0,0,1)
 
 class Node {
+
     var width: Float = -1.0
     var leftChild: Node?
     var rightChild: Node?
+
 
     init(_ leftChild: Node?, _ rightChild: Node?) {
         self.leftChild = leftChild
@@ -13,6 +15,17 @@ class Node {
 
     }
 };
+
+func hoffNodeToNode(hnode: HoffNode?) -> Node? {
+    guard let hnode = hnode else {
+        return nil
+    }
+    let newNode = Node(
+        hoffNodeToNode(hnode: hnode.leftChild),
+        hoffNodeToNode(hnode: hnode.rightChild)
+    )
+    return newNode
+}
 
 
 func generateNode() -> Node? {
@@ -28,6 +41,24 @@ func generateNode() -> Node? {
  *             /\ .
  *            .  .
  */
+
+ func createHoffmanTree() -> HoffNode {
+     var someString: String = """
+                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse congue
+                                     faucibus arcu. Nulla at facilisis dolor, a efficitur nibh. Donec ac sem
+                                     faucibus, rhoncus risus vitae, suscipit velit. Aenean tempus id neque eget
+                                     imperdiet. Sed sed mauris id arcu suscipit eleifend ac dictum est. Donec ac arcu
+                                     ultricies, cursus lacus a, tempus nibh. Vestibulum sit amet volutpat dui, eget
+                                     posuere dui. Integer facilisis eu lectus consectetur rutrum. Donec dapibus augue
+                                     rutrum malesuada mollis. Nulla sit amet pretium nisl. Vestibulum placerat vitae
+                                     sapien posuere commodo. Donec tristique ultrices vehicula.
+
+                              """
+     let h = Hoffman(someString: someString)
+     h.makeTrees()
+     return h.head!
+ }
+
 func createTreeNodes() -> Node {
     let head = Node(generateNode(), generateNode())
     return head
@@ -106,10 +137,19 @@ func createTreeVertices(_ headNode: Node, x: Float, y: Float, h: Float) -> [Vert
     return vertices
 }
 
+//func createTree() -> [Vertex] {
+//    var treeHead = createTreeNodes2()
+//    computeTreeWidths(node: treeHead)
+//    var vertices = createTreeVertices(treeHead, x: 0, y: 1, h: 0.2)
+//    return vertices
+//}
+
 func createTree() -> [Vertex] {
-    var treeHead = createTreeNodes2()
+    let hhead = createHoffmanTree()
+    var treeHead = hoffNodeToNode(hnode: hhead)
     computeTreeWidths(node: treeHead)
-    var vertices = createTreeVertices(treeHead, x: 0, y: 1, h: 0.2)
+    var vertices = createTreeVertices(treeHead!, x: 0, y: 1, h: 0.2)
     return vertices
+
 }
 
