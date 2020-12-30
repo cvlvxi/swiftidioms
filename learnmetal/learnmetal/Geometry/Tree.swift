@@ -1,4 +1,3 @@
-import Foundation
 
 let DEFAULT_WIDTH: Float = 0.01
 var DEFAULT_COLOR: SIMD4<Float> = SIMD4<Float>(1,0,0,1)
@@ -33,6 +32,21 @@ func createTreeNodes() -> Node {
     let head = Node(generateNode(), generateNode())
     return head
 }
+
+func createTreeNodes2() -> Node {
+    let head = Node(generateNode(), nil)
+    head.rightChild = createSymmetricTree(node: head.leftChild)
+    return head
+}
+
+func createSymmetricTree(node: Node?) -> Node? {
+    guard let node = node else {
+        return nil
+    }
+    return Node(createSymmetricTree(node: node.rightChild), createSymmetricTree(node: node.leftChild))
+}
+
+
 
 func computeTreeWidths(node: Node?) -> Float {
     guard let node = node else {
@@ -93,9 +107,9 @@ func createTreeVertices(_ headNode: Node, x: Float, y: Float, h: Float) -> [Vert
 }
 
 func createTree() -> [Vertex] {
-    var treeHead = createTreeNodes()
+    var treeHead = createTreeNodes2()
     computeTreeWidths(node: treeHead)
     var vertices = createTreeVertices(treeHead, x: 0, y: 1, h: 0.2)
-    print("aweriljawe")
     return vertices
 }
+

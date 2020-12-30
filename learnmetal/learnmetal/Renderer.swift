@@ -76,8 +76,8 @@ extension Renderer: MTKViewDelegate {
 
     func draw(in view: MTKView) {
         // Spaz
-//        vertices = createTree()
-//        self.vertexBuffer = Renderer.device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count),  options: [])
+        vertices = createTree()
+        self.vertexBuffer = Renderer.device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count),  options: [])
         guard let descriptor = view.currentRenderPassDescriptor,
               let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
               let renderEncoder =
