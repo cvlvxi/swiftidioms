@@ -18,6 +18,7 @@
 		673509E431270537BC2E1872 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673504EC0EF78BCEF0A955AF /* Triangle.swift */; };
 		67350A091D3E2DCDE17C6470 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67350ED72447CBD6D4B04854 /* AppDelegate.swift */; };
 		67350A6414CCB9A71F36ED17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67350E22C0490DCCAECFF69D /* ViewController.swift */; };
+		67350AA912B25FBCD11B652F /* Hoffman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67350084F382B41976E6DFA5 /* Hoffman.swift */; };
 		67350D6367115595F22D6FE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 673505DD98A6A5B3ABFCA1C4 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		67350084F382B41976E6DFA5 /* Hoffman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hoffman.swift; sourceTree = "<group>"; };
 		673501122730ADF6C0028C7D /* Primitive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Primitive.swift; sourceTree = "<group>"; };
 		673501B447934499A6D2D0CD /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		673503466FB5F025F0594D1E /* learnmetal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = learnmetal.entitlements; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				673505287352820FC0E5D4CD /* Shaders.metal */,
 				673501B447934499A6D2D0CD /* Types.swift */,
 				67350C39903820B637415E53 /* Geometry */,
+				67350BCB734058FE300C699A /* Deflate */,
 			);
 			path = learnmetal;
 			sourceTree = "<group>";
@@ -129,6 +132,14 @@
 				67350517D1D6947F16D18436 /* learnmetalTests.swift */,
 			);
 			path = learnmetalTests;
+			sourceTree = "<group>";
+		};
+		67350BCB734058FE300C699A /* Deflate */ = {
+			isa = PBXGroup;
+			children = (
+				67350084F382B41976E6DFA5 /* Hoffman.swift */,
+			);
+			path = Deflate;
 			sourceTree = "<group>";
 		};
 		67350BF77848FD3EB58D91F6 = {
@@ -282,6 +293,7 @@
 				6735062FBC1CE76223027A7D /* Types.swift in Sources */,
 				673507C26B89C81B38900758 /* Tree.swift in Sources */,
 				673509E431270537BC2E1872 /* Triangle.swift in Sources */,
+				67350AA912B25FBCD11B652F /* Hoffman.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
