@@ -16,6 +16,30 @@ final class fsTests: XCTestCase {
         XCTAssertEqual(true, manager.fileExists(atPath: path))
     }
 
+    /*
+     29
+     16 + 8 + 4 + 0 + 1
+      11101  >> 00001
+      11101 <<  00010
+
+     */
+
+    func testGzip() throws {
+        let path = "data/mcap_small2.txt.gz"
+        checkDirectoryExists(path: path)
+        let fh = FileHandle(forReadingAtPath: path)!
+        let some_data = fh.readData(ofLength: 100)
+        for currByte in some_data {
+            var bit_str = ""
+            for i in stride(from: 7, to: -1, by: -1) {
+                let res = ((currByte >> i) % 2)
+                bit_str += String(res)
+            }
+            print(bit_str)
+        }
+    }
+
+
 
     func testDataIterator() throws {
         let path = "data/mcap.txt"

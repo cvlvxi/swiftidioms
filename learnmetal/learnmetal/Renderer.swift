@@ -21,9 +21,6 @@ class Renderer: NSObject {
         Renderer.device = device
         Renderer.commandQueue = device.makeCommandQueue()!
 
-        let head: Node = createTreeNodes()
-        let v = createTreeVertices(head, x: 0, y: 0, h: 10)
-
         self.createVerticesBuffers(vertices: vertices)
         self.createPipelineState(metalView)
        

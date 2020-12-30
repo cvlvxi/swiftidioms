@@ -18,7 +18,9 @@ public class DataIterator : Sequence, IteratorProtocol {
             return nil
         }
         if self.gzipped {
-            return try! data.gunzipped()
+//            return try! data.gunzipped()
+            return nil
+
         } else {
             return data
         }
